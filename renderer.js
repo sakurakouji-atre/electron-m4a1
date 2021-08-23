@@ -21,8 +21,8 @@ function move() {
         clearInterval(timer2)
         // 随机方向移动   遇到边界返回  img: 148 218
         timer2 = setInterval(() => {
-            if (img.offsetLeft < 0 || img.offsetLeft + 70 > document.body.offsetWidth ||
-                img.offsetTop < 0 || img.offsetTop + 110 > document.body.offsetHeight) {
+            if (img.offsetLeft < 70 || img.offsetLeft + 70 > document.body.offsetWidth ||
+                img.offsetTop < 110 || img.offsetTop + 110 > document.body.offsetHeight) {
                 hr = -hr
                 vt = -vt
             }
@@ -119,6 +119,7 @@ function start() {
 
 
 function auto(){
+    clearInterval(timer3)
     start()
     timer3 = setInterval(start, 100000);
 }
@@ -130,6 +131,5 @@ ipcRenderer.on('lie',()=>{
 })
 
 ipcRenderer.on('auto',()=>{
-    clearInterval(timer3)
     auto()
 })

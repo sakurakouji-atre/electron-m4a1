@@ -1,5 +1,5 @@
 {
-  "name": "m4",
+  "name": "m4a1",
   "version": "1.0.0",
   "description": "m4a1 on desktop",
   "main": "main.js",
@@ -9,10 +9,8 @@
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "m4a1",
+    "gf"
   ],
   "author": "GitHub",
   "license": "CC0-1.0",

@@ -21,6 +21,7 @@ function createWindow() {
   })
 
   mainWindow.setSkipTaskbar(true)
+  mainWindow.setIgnoreMouseEvents(true)
   mainWindow.loadFile('index.html')
   return mainWindow
 }
@@ -43,9 +44,9 @@ if (!gotTheLock) {
   app.whenReady().then(() => {
     mainWindow = createWindow()
     //托盘最小化，右键退出菜单
-    let menuChecked = true
+    let menuChecked = false
     let template = [{
-      label: '鼠标点击',
+      label: '无视鼠标事件',
       type: 'checkbox',
       checked: 'true',
       click: function () {
