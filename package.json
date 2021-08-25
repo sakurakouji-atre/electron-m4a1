@@ -4,7 +4,8 @@
   "description": "m4a1 on desktop",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package": "electron-packager . m4a1 --platform=win32 --arch=x64 --icon=icon.ico --out=./out --asar --app-version=0.0.1"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
