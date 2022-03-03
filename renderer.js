@@ -21,9 +21,12 @@ function move() {
         clearInterval(timer2)
         // 随机方向移动   遇到边界返回  img: 148 218
         timer2 = setInterval(() => {
-            if (img.offsetLeft < 70 || img.offsetLeft + 70 > document.body.offsetWidth ||
-                img.offsetTop < 110 || img.offsetTop + 110 > document.body.offsetHeight) {
+            // 左右边缘
+            if (img.offsetLeft < 70 || img.offsetLeft + 70 > document.body.offsetWidth) {
                 hr = -hr
+            }
+            // 上下边缘
+            else if(img.offsetTop < 110 || img.offsetTop + 110 > document.body.offsetHeight) {
                 vt = -vt
             }
 
@@ -132,4 +135,14 @@ ipcRenderer.on('lie',()=>{
 
 ipcRenderer.on('auto',()=>{
     auto()
+})
+
+
+// 设置鼠标移动到图片上有鼠标事件，移开无视鼠标事件
+const el = document.querySelector('img')
+el.addEventListener('mouseenter', () => {
+  ipcRenderer.send('set-ignore-mouse-events', false)
+})
+el.addEventListener('mouseleave', () => {
+  ipcRenderer.send('set-ignore-mouse-events', true, { forward: true })
 })

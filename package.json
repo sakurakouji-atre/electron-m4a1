@@ -5,16 +5,13 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "package": "electron-packager . m4a1 --platform=win32 --arch=x64 --icon=icon.ico --out=./out --asar --app-version=0.0.1"
+    "package": "electron-packager . m4a1 --platform=win32 --arch=x64 --icon=icon.ico --overwrite --out=./out --asar --app-version=0.0.1"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
     "Electron",
-    "m4a1",
-    "gf"
+    "girls frontline"
   ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
   "devDependencies": {
     "electron": "^11.2.3"
   }

@@ -1,4 +1,4 @@
-const {app,BrowserWindow,ipcMain,Menu,Tray} = require('electron')
+const { app, BrowserWindow, ipcMain, Menu, Tray } = require('electron')
 const path = require('path')
 const electron = require('electron')
 let appTray = null
@@ -8,8 +8,8 @@ function createWindow() {
   let area = electron.screen.getPrimaryDisplay().workAreaSize
   // Create the browser window.
   let mainWindow = new BrowserWindow({
-    width: area.width-1,
-    height: area.height-1,
+    width: area.width - 1,
+    height: area.height - 1,
     resizable: false, //禁止改变大小
     alwaysOnTop: true,
     frame: false, //无边框
@@ -21,12 +21,12 @@ function createWindow() {
   })
 
   mainWindow.setSkipTaskbar(true)
-  mainWindow.setIgnoreMouseEvents(true)
+  mainWindow.setIgnoreMouseEvents(true, { forward: true })
   mainWindow.loadFile('index.html')
   return mainWindow
 }
 
-//实现单例
+//实现托盘单例
 const gotTheLock = app.requestSingleInstanceLock()
 let mainWindow = null
 if (!gotTheLock) {
@@ -44,28 +44,21 @@ if (!gotTheLock) {
   app.whenReady().then(() => {
     mainWindow = createWindow()
     //托盘最小化，右键退出菜单
-    let menuChecked = false
     let template = [{
-      label: '无视鼠标事件',
-      type: 'checkbox',
-      checked: 'true',
-      click: function () {
-        menuChecked = !menuChecked
-        mainWindow.setIgnoreMouseEvents(!menuChecked)
-      }
-    }, {
-      label: '休息',
-      click: function () {
-        // lie
-        mainWindow.webContents.send('lie')
-      }
-    }, {
       label: '自动',
       click: function () {
         // auto
         mainWindow.webContents.send('auto')
       }
-    }, {
+    },
+    {
+      label: '休息',
+      click: function () {
+        // lie
+        mainWindow.webContents.send('lie')
+      }
+    },
+    {
       label: '退出',
       click: function () {
         app.quit()
@@ -75,7 +68,7 @@ if (!gotTheLock) {
     let iconPath = path.join(__dirname, './icon.ico')
     appTray = new Tray(iconPath)
     const menu = Menu.buildFromTemplate(template)
-    appTray.setToolTip('m4')
+    appTray.setToolTip('m4a1')
     appTray.setContextMenu(menu)
     // 点击托盘显示主程序
     appTray.on('click', function () {
@@ -91,6 +84,10 @@ if (!gotTheLock) {
     })
     ipcMain.on('close', () => {
       app.quit()
+    })
+
+    ipcMain.on('set-ignore-mouse-events', (event, ...args) => {
+      BrowserWindow.fromWebContents(event.sender).setIgnoreMouseEvents(...args)
     })
   })
 }
