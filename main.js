@@ -26,7 +26,7 @@ function createWindow() {
   })
 
   mainWindow.setSkipTaskbar(true)
-  // mainWindow.setIgnoreMouseEvents(true, { forward: true })
+  mainWindow.setIgnoreMouseEvents(true, { forward: true })
   // mainWindow.loadFile('index.html')
   mainWindow.loadURL('http://127.0.0.1:2333/index.html')
   return mainWindow
