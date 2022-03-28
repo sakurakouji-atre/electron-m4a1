@@ -1,0 +1,3 @@
+- 一个electron的小demo
+- 将spine动画显示在桌面上。pixijs运行spine动画需要服务器环境，server.js里简单的写了个node服务器，端口号2333
+- bundle.js来自pixijs-demo
